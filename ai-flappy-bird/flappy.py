@@ -1,5 +1,6 @@
 import pygame, random, time
 from pygame.locals import *
+from genetic_algorithm import GeneticAlgorithm
 
 #VARIABLES
 SCREEN_WIDHT = 400
@@ -55,8 +56,6 @@ class Bird(pygame.sprite.Sprite):
     def begin(self):
         self.current_image = (self.current_image + 1) % 3
         self.image = self.images[self.current_image]
-
-
 
 
 class Pipe(pygame.sprite.Sprite):
@@ -171,6 +170,17 @@ while begin:
     ground_group.draw(screen)
 
     pygame.display.update()
+
+    # Genetic algorithm parameters
+    population_size = 10
+    chromosome_length =20
+    # Initialize the genetic algorithm
+    ga = GeneticAlgorithm(population_size, chromosome_length)
+    # Initialize the population of bird agents
+    population = ga.initialize_population()
+    # Print the population for verification
+    for i, chromosome in enumerate(population):
+        print(f"Bird Agent {i+1}: {chromosome}")
 
 
 while True:
